@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome Nikhil Kashyap!</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+      color: white;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 100px;
+      animation: spin 3s infinite linear;
+      color: yellow;
+    }
+
+    .hidden-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      font-size: 6em;
+      color: red;
+      font-weight: bold;
+      transition: transform 1s ease;
+      text-shadow: 4px 4px 10px white;
+    }
+
+    .show {
+      transform: translate(-50%, -50%) scale(1.5) rotate(360deg);
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: hsl(0, 100%, 50%);
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Hey Nikhil Kashyap! Ready for a surprise? 🎁</h1>
+  <div id="message" class="hidden-message">YOU IDIOT 😂 GIVE ME MY BLUETOOTH I NEED IT MAN DONT RUN LIKE A GIRL</div>
+
+  <audio id="scream" src="https://www.soundjay.com/human/sounds/scream-01.mp3"></audio>
+
+  <script>
+    // Create confetti
+    for (let i = 0; i < 100; i++) {
+      let confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.top = -10 + 'px';
+      confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(confetti);
+    }
+
+    // Random screen shake
+    function shakeScreen() {
+      const intensity = 10;
+      const x = Math.random() * intensity - intensity / 2;
+      const y = Math.random() * intensity - intensity / 2;
+      document.body.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    // Delay before surprise
+    setTimeout(() => {
+      document.getElementById('message').classList.add('show');
+      document.getElementById('scream').play();
+      setInterval(shakeScreen, 100);
+      // Change background rapidly
+      setInterval(() => {
+        document.body.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      }, 200);
+    }, 5000);
+  </script>
+</body>
+</html>
